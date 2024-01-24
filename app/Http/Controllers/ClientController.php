@@ -9,8 +9,15 @@ use Illuminate\Support\Facades\Validator;
 
 class ClientController extends Controller
 {
-
-
+    public function index()
+    {
+        $clients = Client::all();
+        return response()->json([
+            'status' => true,
+            'message' => 'Clientes encontrados con éxito',
+            'clients' => $clients
+        ], 200);
+    }
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
@@ -19,7 +26,6 @@ class ClientController extends Controller
             'email' => 'required|email',
             'phone' => 'required|min:7|max:15'
         ]);
-
         if($validator->fails()){
             return response()-> json([
                 'status'=> false,
@@ -27,8 +33,6 @@ class ClientController extends Controller
                 'message' => "Ha ocurrido un error al realizar el registro, verifique los datos"
             ], 500); 
         }
-
-
         $client = new CLient;
         $client -> name = $request -> name;
         $client -> lastname = $request -> lastname;
@@ -43,21 +47,17 @@ class ClientController extends Controller
     }
     public function show($id)
     {
-        
-        $client = Client::find($id);    
-
+        $client = Client::find($id);
         if (!$client) {
             return response()->json([
                 'status' => false,
                 'error' => 'Cliente no encontrado'
             ], 404); 
-        } 
-
+        }
         return response()->json([
             'status' => true,
             'message' => 'Cliente encontrado con éxito',
             'client' => $client
         ], 200);
     }
-
 }
