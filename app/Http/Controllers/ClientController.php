@@ -22,7 +22,7 @@ class ClientController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|min:3|max:50',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:clients',
             'phone' => 'required|numeric'
         ]);
         if ($validator->fails()) {
@@ -36,7 +36,7 @@ class ClientController extends Controller
         $client -> email = $request -> email;
         $client -> phone = $request -> phone;
         $client -> save();
-        event(new event_participantes($client));
+        //event(new event_participantes($client));
         return response()-> json([
             'status' => true,
             'message' => 'Cliente creado con éxito.'
