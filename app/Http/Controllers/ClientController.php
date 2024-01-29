@@ -20,17 +20,16 @@ class ClientController extends Controller
     }
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(),[
-            'name'  => 'required|string|min:3|max:255',
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|alpha',
             'email' => 'required|email',
-            'phone' => 'required|min:7|max:15'
+            'phone' => 'required|numeric'
         ]);
-        if($validator->fails()){
-            return response()-> json([
-                'status'=> false,
-                'errors' => $validator->errors(),
-                'message' => "Ha ocurrido un error al realizar el registro, verifique los datos"
-            ], 500); 
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'error' => $validator->errors()
+            ], 400);
         }
         $client = new CLient;
         $client -> name = $request -> name;
