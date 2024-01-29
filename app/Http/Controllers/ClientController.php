@@ -18,7 +18,7 @@ class ClientController extends Controller
             'clients' => $clients
         ], 200);
     }
-    public function store(Request $request)
+    public function store($request)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|alpha',
@@ -31,9 +31,9 @@ class ClientController extends Controller
                 'error' => $validator->errors()
             ], 400);
         }
-        $client = new CLient;
+        $client = new Client;
         $client -> name = $request -> name;
-        $client -> lastname = $request -> lastname;
+        $client -> lastname = null;
         $client -> email = $request -> email;
         $client -> phone = $request -> phone;
         $client -> save();
