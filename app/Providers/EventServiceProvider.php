@@ -16,7 +16,7 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         'App\Events\event_participantes' => [
-            'App\Listeners\Emailbienvenida',
+            'App\Listeners\EmailBienvenida',
         ],
         
     ];

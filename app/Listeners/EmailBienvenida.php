@@ -10,7 +10,7 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 
-class Emailbienvenida
+class EmailBienvenida
 {
     /**
      * Create the event listener.
@@ -30,24 +30,21 @@ class Emailbienvenida
      */
     public function handle(event_participantes $event)
     {
-        
-        try{
+        try {
             $mail = new PHPMailer(true);
-            $mail ->Host      = SMTP::DEBUG_SERVER;
+            $mail->Host = SMTP::DEBUG_SERVER;
             $mail->isSMTP();
-            $mail->Host       = 'mail.bellakeofest.com';
-            $mail->SMTPAuth   = true;
-            $mail->Username   = 'noreply@bellakeofest.com';
-            $mail->Password   = 'Temporal123.$';
+            $mail->Host = 'mail.bellakeofest.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'noreply@bellakeofest.com';
+            $mail->Password = 'Temporal123.$';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-            $mail->Port       = 465;
+            $mail->Port = 465;
             $mail->setFrom('noreply@bellakeofest.com', 'BELLAKEOFEST');
-            $mail->addAddress($event-> client-> email);
-            $mail->isHTML(true);                                  
+            $mail->addAddress($event->client->email);
+            $mail->isHTML(true);
             $mail->Subject = 'Registro exitoso';
-            $mail->Body    = 'Bellakeofest te da la bienvenida';
-            $mail->AltBody = 'Bellakeofest te da la bienvenida';
-
+            $mail->Body = 'Bellakeofest te da la bienvenida';
             $mail->send();
         }
         catch (Exception $e) {
