@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Client extends Model
 {
-    protected $table = 'c_lients';
+    protected $table = 'clients';
     use HasFactory;
 }

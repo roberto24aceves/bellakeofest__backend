@@ -33,7 +33,6 @@ class ClientController extends Controller
         }
         $client = new Client;
         $client -> name = $request -> name;
-        $client -> lastname = null;
         $client -> email = $request -> email;
         $client -> phone = $request -> phone;
         $client -> save();
