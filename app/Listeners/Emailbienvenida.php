@@ -35,30 +35,23 @@ class Emailbienvenida
             $mail = new PHPMailer(true);
             $mail ->Host      = SMTP::DEBUG_SERVER;
             $mail->isSMTP();
-            $mail->Host       = 'smtp.gmail.com';  
+            $mail->Host       = 'mail.bellakeofest.com';
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'ivancitoenano27@gmail.com';     
-            $mail->Password   = 'wxka rjwe qjjb dkav';     
+            $mail->Username   = 'noreply@bellakeofest.com';
+            $mail->Password   = 'Temporal123.$';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-            $mail->Port       = 465;                
-
-        // Destinatarios
-            $mail->setFrom('empresa@gmail.com', 'Empresa');
-            $mail->addAddress($event-> client-> email);     
-
-        // Contenido del correo
+            $mail->Port       = 465;
+            $mail->setFrom('noreply@bellakeofest.com', 'BELLAKEOFEST');
+            $mail->addAddress($event-> client-> email);
             $mail->isHTML(true);                                  
-            $mail->Subject = 'Mensaje de bienvenida';
-            $mail->Body    = 'Bienvenido, se ha registrado correctamente';
-            $mail->AltBody = 'bienvenido';
+            $mail->Subject = 'Registro exitoso';
+            $mail->Body    = 'Bellakeofest te da la bienvenida';
+            $mail->AltBody = 'Bellakeofest te da la bienvenida';
 
             $mail->send();
-            echo 'Correo enviado, revise su correo electronico';
         }
         catch (Exception $e) {
-            echo "El mensaje no pudo ser enviado. Mailer Error: {$mail->ErrorInfo}";
-        }        
-        
-        
+            var_dump($e);
+        }
     }
 }
