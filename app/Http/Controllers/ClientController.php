@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use Illuminate\Http\Request;
-use App\Events\event_participantes;
 use Illuminate\Support\Facades\Validator;
-
+use App\Http\Controllers\MailController;
+use App\Mail\ConfirmationEmail;
+use Illuminate\Support\Facades\Mail;
 class ClientController extends Controller
 {
     public function index()
@@ -14,7 +15,6 @@ class ClientController extends Controller
         $clients = Client::all();
         return response()->json([
             'status' => true,
-            'message' => 'Clientes encontrados con éxito',
             'clients' => $clients
         ], 200);
     }
@@ -28,33 +28,25 @@ class ClientController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'status' => false,
-                'error' => $validator->errors()
+                'message' => $validator->errors()
             ], 400);
+        }
+        try {
+            Mail::to($request->email)->send(new ConfirmationEmail($request));
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => "El correo de confirmacion no se ha podido enviar, intente nuevamente."
+            ], 500);
         }
         $client = new Client;
         $client -> name = $request -> name;
         $client -> email = $request -> email;
         $client -> phone = $request -> phone;
         $client -> save();
-        //event(new event_participantes($client));
         return response()-> json([
             'status' => true,
             'message' => 'Cliente creado con éxito.'
-        ], 200);
-    }
-    public function show($id)
-    {
-        $client = Client::find($id);
-        if (!$client) {
-            return response()->json([
-                'status' => false,
-                'error' => 'Cliente no encontrado'
-            ], 404); 
-        }
-        return response()->json([
-            'status' => true,
-            'message' => 'Cliente encontrado con éxito',
-            'client' => $client
         ], 200);
     }
 }
