@@ -21,8 +21,19 @@
                             <table border="0" cellpadding="0" cellspacing="0" id="templateBody" width="100%">
                                 <tbody>
                                 <tr>
+                                    <td align="center" valign="top">
+                                        <table border="0" cellpadding="0" cellspacing="0" id="templateHeader" width="100%">
+                                            <tbody>
+                                            <tr>
+                                                <td class="headerContent" valign="top"><img alt="SETRAD" id="headerImage" src="https://bellakeofest.vercel.app/bellakeo_cover.png" style="max-width:500px" width="500" /></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td class="bodyContent" valign="top">
-                                        <h2 style="font-family: 'Kanit', sans-serif; font-weight: bold; color: #181818;">BELLAKEOFEST</h2>
+                                        <h2 style="font-family: 'Kanit', sans-serif; font-weight: bold; color: #181818;">¡Bienvenido!</h2>
                                         <p>{{$name}}</p>
                                         <p>¡Gracias por registrarte!</p>
                                         <p>Tu participación en el <strong>BELLAKEOFEST</strong> sera muy importante, no olvides agregarlo a tu <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Bellakeofest&dates=20240301T000000/20240301T010000&location=Calle%2023,%20118%20Y%20116%20PUERTO%20DE%20ABRIGO,%20Telchac%20Puerto,%20C.P.97407" target="_blank">calendario</a>.</p>
