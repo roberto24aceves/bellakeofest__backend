@@ -14,7 +14,7 @@ use App\Http\Controllers\ClientController;
 |
 */
 
-Route::apiResource('clientes', ClientController::class);
+Route::apiResource('clientes', ClientController::class)->only(['index', 'store']);
 
 
 
